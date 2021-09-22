@@ -1,0 +1,17 @@
+stages:
+  - run-tests
+
+variables:
+  API_TOKEN: "$apiToken"
+
+RUN_CRUD_TESTS:
+  stage: run-tests
+  script:
+    - mvn clean test -DapiToken=$apiToken
+  allow_failure: false
+  artifacts:
+    paths:
+      - target/surefire-reports
+    expire_in: 3 days
+  tags:
+    - api
